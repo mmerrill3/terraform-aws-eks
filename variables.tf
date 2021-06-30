@@ -92,6 +92,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "cluster_tags" {
+  description = "A map of tags to add to just the EKS cluster."
+  type        = map(string)
+  default     = {}
+}
+
 variable "vpc_id" {
   description = "VPC where the cluster and workers will be deployed."
   type        = string
