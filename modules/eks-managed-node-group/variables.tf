@@ -473,5 +473,5 @@ variable "iam_role_tags" {
 variable "prefix_separator" {
   description = "The separator to use between the prefix and the generated timestamp for resource names"
   type        = string
-  default     = "-"
+  default     = ""
 }
