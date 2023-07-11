@@ -208,8 +208,28 @@ data "aws_iam_policy_document" "queue" {
     }
 
   }
-}
+  statement {
+    sid       = "DenyCrossAccountAccess"
+    action    = ["sqs:*"]
+    resources = ["*"]
+    effect    = "Deny"
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "ForAnyValue:StringNotLike"
+      variable = "aws:PrincipalArn"
+      values   = ["arn:aws:iam::${locals.account_id}:*", "arn:aws:sts::${locals.account_id}:*"]
+    }
 
+    condition {
+      test     = "ForAnyValue:StringNotLike"
+      variable = "aws:PrincipalServiceName"
+      values   = ["*.amazonaws.com"]
+    }
+  }
+}
 resource "aws_sqs_queue_policy" "this" {
   count = local.enable_spot_termination ? 1 : 0
 
