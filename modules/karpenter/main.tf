@@ -253,7 +253,7 @@ resource "aws_sqs_queue_policy" "this" {
   count = local.enable_spot_termination ? 1 : 0
 
   queue_url = aws_sqs_queue.this[0].url
-  policy    = data.aws_iam_policy_document.queue.json
+  policy    = data.aws_iam_policy_document.queue[0].json
 }
 
 ################################################################################
