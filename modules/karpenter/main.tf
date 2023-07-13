@@ -238,7 +238,7 @@ data "aws_iam_policy_document" "queue" {
     condition {
       test     = "ForAnyValue:StringNotLike"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${locals.account_id}:*", "arn:aws:sts::${locals.account_id}:*"]
+      values   = ["arn:aws:iam::${local.account_id}:*", "arn:aws:sts::${local.account_id}:*"]
     }
 
     condition {
