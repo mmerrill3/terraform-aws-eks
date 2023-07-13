@@ -228,7 +228,7 @@ data "aws_iam_policy_document" "queue" {
   }
   statement {
     sid       = "DenyCrossAccountAccess"
-    action    = ["sqs:*"]
+    actions   = ["sqs:*"]
     resources = ["*"]
     effect    = "Deny"
     principals {
