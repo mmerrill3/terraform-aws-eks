@@ -236,13 +236,13 @@ data "aws_iam_policy_document" "queue" {
       identifiers = ["*"]
     }
     condition {
-      test     = "ForAnyValue:StringNotLike"
+      test     = "StringNotLike"
       variable = "aws:PrincipalArn"
       values   = ["arn:aws:iam::${local.account_id}:*", "arn:aws:sts::${local.account_id}:*"]
     }
 
     condition {
-      test     = "ForAnyValue:StringNotLike"
+      test     = "StringNotLike"
       variable = "aws:PrincipalServiceName"
       values   = ["*.amazonaws.com"]
     }
