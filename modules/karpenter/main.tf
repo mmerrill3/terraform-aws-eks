@@ -226,6 +226,27 @@ data "aws_iam_policy_document" "queue" {
     }
 
   }
+  statement {
+    sid       = "DenyCrossAccountAccess"
+    actions   = ["sqs:*"]
+    resources = ["*"]
+    effect    = "Deny"
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "StringNotLike"
+      variable = "aws:PrincipalArn"
+      values   = ["arn:aws:iam::${local.account_id}:*", "arn:aws:sts::${local.account_id}:*"]
+    }
+
+    condition {
+      test     = "StringNotLike"
+      variable = "aws:PrincipalServiceName"
+      values   = ["*.amazonaws.com"]
+    }
+  }
 }
 
 resource "aws_sqs_queue_policy" "this" {
