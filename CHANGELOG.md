@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+## [19.18.0](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.17.4...v19.18.0) (2023-11-01)
+
+
+### Features
+
+* Add Karpenter v1beta1 compatibility ([#2800](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2800)) ([aec2bab](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/aec2bab1d8da89b65b84d11fef77cbc969fccc91))
+
+### [19.17.4](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.17.3...v19.17.4) (2023-10-30)
+
+
+### Bug Fixes
+
+* Updating license_specification result type ([#2798](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2798)) ([ba0ebeb](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/ba0ebeb11a64a6400a3666165509975d5cdfea43))
+
+### [19.17.3](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.17.2...v19.17.3) (2023-10-30)
+
+
+### Bug Fixes
+
+* Correct key used on `license_configuration_arn` ([#2796](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2796)) ([bd4bda2](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/bd4bda266e23635c7ca09b6e9d307b29ef6b8579))
+
+### [19.17.2](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.17.1...v19.17.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* Karpenter node IAM role policies variable should be a map of strings, not list ([#2771](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2771)) ([f4766e5](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/f4766e5c27f060e8c7f5950cf82d1fe59c3231af))
+
+### [19.17.1](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.17.0...v19.17.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* Only include CA thumbprint in OIDC provider list ([#2769](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2769)) ([7e5de15](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/7e5de1566c7e1330c05c5e6c51f5ab4690001915)), closes [#2732](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2732) [#32847](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/32847)
+
+## [19.17.0](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.16.0...v19.17.0) (2023-10-06)
+
+
+### Features
+
+* Add support for `allowed_instance_types` on self-managed nodegroup ASG ([#2757](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2757)) ([feee18d](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/feee18dd423b1e76f8a5119206f23306e5879b26))
+
+## [19.16.0](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.15.4...v19.16.0) (2023-08-03)
+
+
+### Features
+
+* Add `node_iam_role_arns` local variable to check for Windows platform on EKS managed nodegroups ([#2477](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2477)) ([adb47f4](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/adb47f46dc53b1a0c18691a59dc58401c327c0be))
+
+### [19.15.4](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.15.3...v19.15.4) (2023-07-27)
+
+
+### Bug Fixes
+
+* Use `coalesce` when desired default value is not `null` ([#2696](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2696)) ([c86f8d4](https://github.com/terraform-aws-modules/terraform-aws-eks/commit/c86f8d4db3236e7dae59ef9142da4d7e496138c8))
+
 ### [19.15.3](https://github.com/terraform-aws-modules/terraform-aws-eks/compare/v19.15.2...v19.15.3) (2023-06-09)
 
 

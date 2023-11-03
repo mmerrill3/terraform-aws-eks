@@ -232,7 +232,7 @@ resource "aws_iam_openid_connect_provider" "oidc_provider" {
   count = local.create && var.enable_irsa && !local.create_outposts_local_cluster ? 1 : 0
 
   client_id_list  = distinct(compact(concat(["sts.${local.dns_suffix}"], var.openid_connect_audiences)))
-  thumbprint_list = concat(data.tls_certificate.this[0].certificates[*].sha1_fingerprint, var.custom_oidc_thumbprints)
+  thumbprint_list = concat([data.tls_certificate.this[0].certificates[0].sha1_fingerprint], var.custom_oidc_thumbprints)
   url             = aws_eks_cluster.this[0].identity[0].oidc[0].issuer
 
   tags = merge(
@@ -386,7 +386,7 @@ resource "aws_eks_addon" "this" {
   cluster_name = aws_eks_cluster.this[0].name
   addon_name   = try(each.value.name, each.key)
 
-  addon_version            = try(each.value.addon_version, data.aws_eks_addon_version.this[each.key].version)
+  addon_version            = coalesce(try(each.value.addon_version, null), data.aws_eks_addon_version.this[each.key].version)
   configuration_values     = try(each.value.configuration_values, null)
   preserve                 = try(each.value.preserve, null)
   resolve_conflicts        = try(each.value.resolve_conflicts, "OVERWRITE")
@@ -414,7 +414,7 @@ resource "aws_eks_addon" "before_compute" {
   cluster_name = aws_eks_cluster.this[0].name
   addon_name   = try(each.value.name, each.key)
 
-  addon_version            = try(each.value.addon_version, data.aws_eks_addon_version.this[each.key].version)
+  addon_version            = coalesce(try(each.value.addon_version, null), data.aws_eks_addon_version.this[each.key].version)
   configuration_values     = try(each.value.configuration_values, null)
   preserve                 = try(each.value.preserve, null)
   resolve_conflicts        = try(each.value.resolve_conflicts, "OVERWRITE")
@@ -469,7 +469,7 @@ locals {
   node_iam_role_arns_non_windows = distinct(
     compact(
       concat(
-        [for group in module.eks_managed_node_group : group.iam_role_arn],
+        [for group in module.eks_managed_node_group : group.iam_role_arn if group.platform != "windows"],
         [for group in module.self_managed_node_group : group.iam_role_arn if group.platform != "windows"],
         var.aws_auth_node_iam_role_arns_non_windows,
       )
@@ -479,6 +479,7 @@ locals {
   node_iam_role_arns_windows = distinct(
     compact(
       concat(
+        [for group in module.eks_managed_node_group : group.iam_role_arn if group.platform == "windows"],
         [for group in module.self_managed_node_group : group.iam_role_arn if group.platform == "windows"],
         var.aws_auth_node_iam_role_arns_windows,
       )
